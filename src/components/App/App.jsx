@@ -4,19 +4,23 @@ import SearchBar from "../SearchBar/SearchBar";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import fetchPhotots from "../../services/api";
 import Loader from "../Loader/Loader";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const App = () => {
   const [query, setQuery] = useState("cat");
   const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const getphotos = async () => {
       try {
+        setIsError(false);
         setIsLoading(true);
         const response = await fetchPhotots(query, 5);
         setPhotos(response.results);
       } catch (error) {
+        setIsError(true);
         console.log(error);
       } finally {
         setIsLoading(false);
@@ -36,6 +40,7 @@ const App = () => {
     <div>
       <SearchBar setQuery={setQuery} />
       {isLoading && <Loader />}
+      {isError && <ErrorMessage />}
       {photos.length > 0 && <ImageGallery photos={photos} />}
     </div>
   );
