@@ -5,20 +5,22 @@ import ImageGallery from "../ImageGallery/ImageGallery";
 import fetchPhotots from "../../services/api";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 
 const App = () => {
   const [query, setQuery] = useState("cat");
   const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const getphotos = async () => {
       try {
         setIsError(false);
         setIsLoading(true);
-        const response = await fetchPhotots(query, 5);
-        setPhotos(response.results);
+        const response = await fetchPhotots(query, page, 2);
+        setPhotos((prev) => [...prev, ...response.results]);
       } catch (error) {
         setIsError(true);
         console.log(error);
@@ -27,14 +29,12 @@ const App = () => {
       }
     };
     getphotos();
-  }, [query]);
+  }, [query, page]);
 
   // const onSubmit = (searchQuery) => {
   //   console.log(searchQuery.search);
   //   setQuery(searchQuery.search);
   // };
-
-  console.log(photos);
 
   return (
     <div>
@@ -42,6 +42,11 @@ const App = () => {
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
       {photos.length > 0 && <ImageGallery photos={photos} />}
+      <LoadMoreBtn
+        onClick={() => {
+          setPage((prev) => prev + 1);
+        }}
+      />
     </div>
   );
 };
