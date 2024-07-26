@@ -1,11 +1,18 @@
-const ImageCard = ({ data }) => {
-  // console.log(data);
+import s from "./ImageCard.module.css";
 
+const ImageCard = ({ data, onClick }) => {
   return (
-    <div>
-      <img src={data.urls.small} alt="" width={300} />
-    </div>
+    <>
+      <img
+        className={s.image}
+        src={data.urls.small}
+        alt=""
+        width={350}
+        height={300}
+        onClick={() => onClick(data.urls.regular)}
+        style={{ cursor: "pointer" }}
+      />
+    </>
   );
 };
-
 export default ImageCard;

@@ -4,9 +4,8 @@ import App from "./components/App/App";
 import "modern-normalize";
 import "./index.css";
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-//ReactDOM.createRoot(document.getElementById("root")).render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);

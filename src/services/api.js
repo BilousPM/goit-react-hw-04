@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const fetchPhotots = async (query, page = 1, perPage = 5) => {
+export const fetchPhotots = async (query, page = 1, perPage = 5) => {
   const ACCESS_KEY = "wp4xAFKY3Ftqixlrg2JE9qdFAU2L2JyQZGvTnqlrbu4";
 
   const response = await axios.get(
@@ -18,5 +18,3 @@ const fetchPhotots = async (query, page = 1, perPage = 5) => {
   );
   return response.data;
 };
-
-export default fetchPhotots;
