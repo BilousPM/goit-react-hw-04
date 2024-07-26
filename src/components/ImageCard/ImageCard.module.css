@@ -9,3 +9,11 @@
   transform: scale(1.05);
   cursor: zoom-in;
 }
+
+.link {
+  color: rgb(252, 252, 252);
+  text-decoration: none;
+}
+.likes {
+  padding-top: 5px;
+}
